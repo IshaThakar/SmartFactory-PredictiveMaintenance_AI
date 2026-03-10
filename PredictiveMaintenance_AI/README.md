@@ -161,7 +161,7 @@ The model evaluates multiple parameters simultaneously to determine machine heal
 
 1\. Clone the Repository
 
-git clone https://github.com/IshaThakar/PredictiveMaintenance\_AI
+git clone https://github.com/IshaThakar/PredictiveMaintenance_AI
 
 
 
@@ -248,4 +248,5 @@ Possible enhancements for future versions:
 
 
 This project was developed as part of a Hackathon prototype to demonstrate how AI and real-time dashboards can be used to build intelligent maintenance systems for modern factories.
+
 
