@@ -159,4 +159,73 @@ with st.tabs(["📈 Machine Health Timeline"])[0]:
         yaxis=dict(range=[0,100])
     )
 
+
     st.plotly_chart(fig, use_container_width=True)
+     # -------- HEALTH & DAMAGE CALCULATION --------
+
+    failure_prob = risk / 100
+
+    damage_percentage = failure_prob * 100
+    health_percentage = 100 - damage_percentage
+
+    st.subheader("Machine Health Analysis")
+
+    col1,col2 = st.columns(2)
+
+    with col1:
+       st.metric("Machine Health Score (%)", f"{health_percentage:.2f}")
+ 
+    with col2:
+       st.metric("Damage Level (%)", f"{damage_percentage:.2f}")
+
+
+# -------- ISSUE DIAGNOSIS --------
+
+    st.subheader("Issue Diagnosis & Suggested Solution")
+
+    solution = "Machine operating normally."
+
+    if data["wear"] > 200:
+      solution = "High Tool Wear detected. Replace the cutting tool soon."
+
+    elif data["process"] > 312:
+      solution = "Process temperature is high. Check cooling system."
+
+    elif data["torque"] > 70:
+      solution = "High torque detected. Inspect mechanical load."
+
+    elif data["speed"] > 2800:
+      solution = "Rotational speed is very high. Consider reducing speed."
+
+    st.info(solution)
+
+
+# -------- REMAINING OPERATING TIME --------
+
+    st.subheader("Estimated Remaining Operating Time")
+
+    if failure_prob < 0.3:
+      time_left = "More than 24 hours"
+
+    elif failure_prob < 0.6:
+      time_left = "Approximately 6–12 hours"
+
+    else:
+      time_left = "Less than 1 hour"
+
+    st.write(f"Estimated Time Before Failure: **{time_left}**")
+
+# -------- AUTO MAINTENANCE SCHEDULER --------
+
+    st.subheader("Recommended Maintenance Schedule")
+
+    if risk < 30:
+      schedule = "Next routine maintenance: within 1 week"
+
+    elif risk < 60:
+      schedule = "Maintenance recommended within 48 hours"
+
+    else:
+      schedule = "Immediate maintenance required"
+
+    st.write(schedule)
